@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     }
 
     getHeroes() {
-        this.heroService.getHeroes().then(data => { this.source = data; });
+        this.source = this.heroService.getHeroesSlowly();//.then(data => { this.source = data; });
     }
 
     ngOnInit() {
@@ -40,7 +40,10 @@ export class AppComponent implements OnInit {
                 return { id: key };
             },
             totalCount: (loadOptions: any) => {
-                if (this.source) return this.source.length;
+                console.log('totalCount...');
+                console.log(this.source);
+                console.log(this.source.length);
+                if (this.source && this.source.length) return this.source.length;
                 else return 0; 
             },
             key: 'ECO_ID'
